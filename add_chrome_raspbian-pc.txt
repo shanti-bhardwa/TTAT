@@ -1,0 +1,21 @@
+
+Google Chrome is the fastest browser. I like Firefox. It’s open source and trusted by countless people in the world. But sometimes Firefox can be very slow on my computer. The default web browser on Debian is iceweasal. It’s Firefox browser under the hood but with a different name. And it’s running very slow on my Debian 8 Gnome Desktop. So Let’s install Google Chrome.
+
+Add Google Chrome Repository on Debian
+Open a terminal window and run this command to edit sources.list file.
+
+sudo nano /etc/apt/sources.list
+Copy the following line and paste it at the end of the file.
+
+deb http://dl.google.com/linux/chrome/deb/ stable main
+Then save and close the file. Next use wget to download Google’s signing key and use apt-key to add it to your keyring so the package manager can verify the integrity of Google Chrome package.
+
+ wget https://dl-ssl.google.com/linux/linux_signing_key.pub
+
+sudo apt-key add linux_signing_key.pub
+Now update local pacakge index and install the stable version of Google Chrome.
+
+sudo apt-get update
+
+sudo apt-get install google-chrome-stable
+If you want to install the beta or unstable version of Google Chrome, use the following commands:
