@@ -1,0 +1,43 @@
+IIAB 7.0 Build using latest Rasbian Images.
+
+The IIAB 7.0 Image is built using the Raspbian Lite Image. You can burn this image to 16 GB SD card, boot up and build IIAB using the one-line install command
+
+
+curl d.iiab.io/7.0/install.txt | sudo bash
+
+
+See the changes I have made to the local_vars.yml. My comment start with #snb changes
+
+OR you can use the 8GB images which has iiab7.0 already built as above.
+
+You can burn this image to another 16GB SD card and it will boot FROM this card.
+
+You can also use SSD in an external USB/SATA drive.
+
+First you have to prepare another SD card with just the boot partions on it. Can use 2 GB card.
+
+First format the card using FAT32 and name its volume name as boot
+
+Copy ALL files from /boot partition to 2GB  SD card.
+
+The cmdline.txt file has the change  for root=PARTUUID=6c586e13-02
+
+from the original 
+
+console=serial0,115200 console=tty1 root=PARTUUID=6c586e13-02 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait
+
+to root=/dev/sda2 
+
+console=serial0,115200 console=tty1 root=/dev/sda2  rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait
+
+
+to say to the PI 4 that root is on /dev/sda2 which is the external drive with the second partition. All the system files are on this root partition.
+
+there is backup of cmdline.txt in the boot directory, just in case!!
+
+Every time you prepare an image for booting from hard drive, create a separate boot card and change the cmdline.txt file as above.
+
+This works on PI2B and all other PI models
+
+
+
